@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About Us - Profiles</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg-cream: #fbf6ee;
+      --pink-soft: #f7c6d0;
+      --pink-text: #e48b9d;
+      --green-btn: #c8db9e;
+      --green-btn-hover: #b6ce85;
+      --text-dark: #4a4a4a;
+      --text-muted: #7d7d7d;
+    }
+
+    body {
+      font-family: 'Noto Sans Thai', sans-serif;
+      background-color: var(--bg-cream);
+      color: var(--text-dark);
+      margin: 0;
+    }
+
+    /* Navbar */
+    .top-navbar {
+      background-color: #ffffff;
+      border-bottom: 1px solid #f0e8dc;
+      padding: 0.85rem 0;
+    }
+    .brand-logo {
+      color: var(--pink-text);
+      font-weight: 700;
+      font-size: 1.45rem;
+      text-decoration: none;
+    }
+    .nav-link-custom {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.95rem;
+      padding-bottom: 4px;
+    }
+    .nav-link-custom.active,
+    .nav-link-custom:hover {
+      color: var(--text-dark);
+      border-bottom: 2px solid var(--pink-text);
+    }
+    .status-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background-color: var(--pink-soft);
+      display: inline-block;
+    }
+
+    /* หน้า 5: Grid 5 คอลัมน์บนจอใหญ่สำหรับ 10 คน */
+    .profiles-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 1.15rem;
+    }
+    @media (max-width: 992px) {
+      .profiles-grid { grid-template-columns: repeat(3, 1fr); }
+    }
+    @media (max-width: 576px) {
+      .profiles-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    .member-card {
+      background-color: #ffffff;
+      border: 1px solid #efe7da;
+      border-radius: 16px;
+      padding: 1.25rem 0.9rem;
+      text-align: center;
+      cursor: pointer;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .member-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+    }
+    .member-avatar {
+      width: 92px;
+      height: 92px;
+      border-radius: 50%;
+      object-fit: cover;
+      background-color: #e9f4fb;
+      margin: 0 auto 0.75rem;
+      display: block;
+    }
+    .member-name {
+      font-weight: 700;
+      font-size: 0.95rem;
+      margin-bottom: 0.1rem;
+    }
+    .member-role {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      margin-bottom: 0.35rem;
+    }
+    .member-bio-short {
+      font-size: 0.72rem;
+      color: #8c8c8c;
+      line-height: 1.4;
+      margin-bottom: 0.85rem;
+    }
+    .btn-view-profile {
+      background-color: var(--green-btn);
+      color: #4f5d32;
+      border: none;
+      border-radius: 999px;
+      padding: 0.28rem 0.95rem;
+      font-size: 0.76rem;
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+      transition: background-color 0.2s;
+    }
+    .member-card:hover .btn-view-profile {
+      background-color: var(--green-btn-hover);
+    }
+
+    /* หน้า 6: Profile Detail */
+    .btn-back {
+      background-color: #ffffff;
+      border: 1px solid #e6dfd5;
+      color: var(--text-muted);
+      border-radius: 999px;
+      padding: 0.35rem 1rem;
+      font-size: 0.85rem;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+    .btn-back:hover {
+      background-color: #fdfaf5;
+      color: var(--text-dark);
+    }
+    .profile-card {
+      background-color: #ffffff;
+      border: 1px solid #efe7da;
+      border-radius: 16px;
+      padding: 1.5rem;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.02);
+    }
+    .profile-banner {
+      background: linear-gradient(90deg, #f9dfe4 0%, #fbf5e8 50%, #dfeed0 100%);
+      border-radius: 12px;
+      min-height: 165px;
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      padding: 1.5rem 2rem;
+    }
+    .banner-caption {
+      max-width: 360px;
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: var(--text-dark);
+      line-height: 1.5;
+    }
+    .profile-avatar-wrap {
+      margin-top: -58px;
+      margin-left: 1.25rem;
+      width: 116px;
+      height: 116px;
+      border-radius: 50%;
+      background-color: #ffffff;
+      padding: 4px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    }
+    .profile-avatar-lg {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      object-fit: cover;
+      background-color: #e9f4fb;
+    }
+    .social-icons a {
+      color: #222222;
+      font-size: 1.2rem;
+      margin-left: 0.65rem;
+      text-decoration: none;
+    }
+    .work-card {
+      background-color: #ffffff;
+      border: 1px solid #efe7da;
+      border-radius: 14px;
+      padding: 0.85rem;
+      height: 100%;
+    }
+    .work-thumb {
+      width: 100%;
+      aspect-ratio: 4 / 5;
+      object-fit: cover;
+      border-radius: 10px;
+      background-color: #e9f4fb;
+      margin-bottom: 0.75rem;
+    }
+    .btn-select-work {
+      background-color: #f9d4dc;
+      color: #6d4650;
+      border: none;
+      border-radius: 8px;
+      padding: 0.35rem 0.75rem;
+      font-size: 0.8rem;
+      font-weight: 600;
+      width: 100%;
+    }
+
+    /* Footer */
+    .site-footer {
+      padding: 2.5rem 0;
+      margin-top: 4rem;
+      font-size: 0.88rem;
+      border-top: 1px solid #efe7da;
+    }
+    .footer-line {
+      border-bottom: 1px solid rgba(74, 74, 74, 0.35);
+      height: 1.25rem;
+      margin-bottom: 0.5rem;
+    }
+    .profile-banner {
+  background-color: #f9dfe4;
+  background-image: linear-gradient(90deg, rgba(249, 223, 228, 0.85) 0%, rgba(251, 245, 232, 0.85) 50%, rgba(223, 238, 208, 0.85) 100%);
+  background-size: cover;
+  background-position: center;
+  border-radius: 12px;
+  min-height: 165px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 1.5rem 2rem;
+}
+.profile-avatar-wrap {
+  background-color: #e9f4fb;
+  overflow: hidden;
+}
+  </style>
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav class="top-navbar">
+    <div class="container d-flex justify-content-between align-items-center" style="max-width: 1040px;">
+      <a href="#" class="brand-logo" onclick="showProfilesList(); return false;">ชื่อบริษัท</a>
+      <div class="d-flex align-items-center gap-4">
+        <a href="#" class="nav-link-custom d-none d-md-inline">Home</a>
+        <a href="#" class="nav-link-custom d-none d-md-inline">Explore Us</a>
+        <a href="#" class="nav-link-custom active d-none d-md-inline" onclick="showProfilesList(); return false;">About Us</a>
+        <a href="#" class="nav-link-custom d-none d-md-inline">Contact us</a>
+        <a href="#" class="text-dark fs-5 text-decoration-none"><i class="bi bi-cart3"></i></a>
+        <span class="status-dot"></span>
+      </div>
+    </div>
+  </nav>
+
+  <!-- VIEW 1: หน้ารวม Profiles ทั้ง 10 คน (หน้า 5) -->
+  <main id="view-profiles-list" class="container my-5" style="max-width: 1040px;">
+    <div class="mb-4">
+      <div class="text-muted small mb-1">Our Creators</div>
+      <h1 class="h3 fw-bold mb-1">Profiles</h1>
+      <p class="text-muted small">รวมผลงานสร้างสรรค์ของนักศึกษาทั้ง 10 คน เลือกประเภทผลงานเพื่อค้นหา</p>
+    </div>
+
+    <div id="profiles-container" class="profiles-grid">
+      <!-- การ์ดสมาชิก 10 คนจะถูกสร้างอัตโนมัติจาก JS ด้านล่าง -->
+    </div>
+  </main>
+
+  <!-- VIEW 2: หน้า Profile รายบุคคล (หน้า 6) ซ่อนไว้ก่อนจนกว่าจะคลิก -->
+  <main id="view-profile-detail" class="container my-4 d-none" style="max-width: 980px;">
+    <div class="mb-3">
+      <button type="button" class="btn-back" onclick="showProfilesList()">
+        <i class="bi bi-arrow-left"></i> Back to Profiles
+      </button>
+    </div>
+
+    <section class="profile-card mb-5">
+      <div class="profile-banner">
+        <div class="banner-caption" id="detail-banner-text">
+          ใส่พื้นหลังเป็นผลงานเราหรืออะไรก็ได้ที่เป็นภาพพื้นหลัง
+        </div>
+      </div>
+
+      <div class="d-flex flex-column flex-md-row justify-content-between align-items-start align-items-md-end px-2">
+        <div class="d-flex flex-column flex-sm-row align-items-start align-items-sm-end gap-3">
+          <div class="profile-avatar-wrap">
+            <img id="detail-avatar" src="" alt="Avatar" class="profile-avatar-lg" onerror="this.style.display='none';" />
+          </div>
+          <div class="pt-2 pt-sm-0 mt-sm-2">
+            <h2 class="h4 fw-bold mb-1" id="detail-nickname">Name</h2>
+            <div class="text-secondary small mb-2" id="detail-fullname">ชื่อจริง สกุล</div>
+            <p class="small text-muted mb-0" id="detail-quote" style="max-width: 420px;"></p>
+          </div>
+        </div>
+
+        <div class="social-icons mt-3 mt-md-0">
+          <a href="#" id="detail-ig"><i class="bi bi-instagram"></i></a>
+          <a href="#" id="detail-fb"><i class="bi bi-facebook"></i></a>
+          <a href="#" id="detail-tt"><i class="bi bi-tiktok"></i></a>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h3 class="h4 fw-bold mb-1">My Works</h3>
+      <p class="text-muted small mb-4">
+        ผลงานของ <span id="detail-works-owner">Name</span> · เลือกผลงานเพื่อดูรายละเอียดหรือเพิ่มลงในรายการสั่งซื้อ
+      </p>
+      <div id="detail-works-grid" class="row g-3 row-cols-2 row-cols-md-4"></div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="container" style="max-width: 1040px;">
+      <div class="row gy-4 align-items-center">
+        <div class="col-md-3 text-center text-md-start">
+          <!-- ใส่รูปโลโก้ดอกบัวตรงนี้ได้เลย -->
+          <img src="โลโก้.png" alt="Logo" style="width: 110px; height: 110px; object-fit: contain;" />
+        </div>
+        <div class="col-md-4">
+          <div class="fw-bold fs-5 mb-2">Padma</div>
+          <div class="small">โทร : 02 000 0000</div>
+          <div class="small mb-2">email : xxx@เมลบริษัท</div>
+          <div class="social-icons ms-0 d-flex gap-2">
+            <a href="#" class="ms-0"><i class="bi bi-instagram"></i></a>
+            <a href="#"><i class="bi bi-facebook"></i></a>
+            <a href="#"><i class="bi bi-tiktok"></i></a>
+            <a href="#"><i class="bi bi-twitter-x"></i></a>
+          </div>
+        </div>
+        <div class="col-md-5">
+          <div class="small mb-2">ที่อยู่บริษัท</div>
+          <div class="footer-line"></div>
+          <div class="footer-line"></div>
+          <div class="text-end small mt-3">© 2026 ชื่อบริษัท</div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+  // ข้อมูลสมาชิกแยกทีละคน (แก้ชื่อ รูปภาพ คำคม และผลงานของแต่ละคนแยกกันได้เลย)
+  const members = [
+    {
+      id: 1,
+      nickname: "Khemjira Phasookboriboon",
+      fullname: "นางสาวเขมจิรา ผาสุบริบูรณ์",
+      role: "Graphic Design",
+      shortBio: "ชอบสร้างสรรค์งานกราฟิก<br>และเล่าเรื่องผ่านสีสัน",
+      quote: "อยากสร้างงานให้คนรู้สึกสวยงามในเรื่องเล็กๆ<br>“ และอยากให้ทุกคนเป็นตัวเองในแบบที่อยากเป็น ”",
+      avatar: "images/varn.jpg",
+      banner: "images/varn.jpg",
+      works: [
+        { title: "ผลงาน 1 ของคนที่ 1", category: "Motion Graphics", price: "฿450", img: "https://placehold.co/300x380/e9f4fb/7aa863?text=W1" },
+        { title: "ผลงาน 2 ของคนที่ 1", category: "Graphic Design", price: "฿450", img: "https://placehold.co/300x380/e9f4fb/7aa863?text=W2" },
+        { title: "ผลงาน 3 ของคนที่ 1", category: "Drawing & Art", price: "฿450", img: "https://placehold.co/300x380/e9f4fb/7aa863?text=W3" },
+        { title: "ผลงาน 4 ของคนที่ 1", category: "Photography", price: "฿450", img: "https://placehold.co/300x380/e9f4fb/7aa863?text=W4" },
+        { title: "ผลงาน 5 ของคนที่ 1", category: "Drawing & Art", price: "฿450", img: "https://placehold.co/300x380/e9f4fb/7aa863?text=W5" },
+        { title: "ผลงาน 6 ของคนที่ 1", category: "Photography", price: "฿450", img: "https://placehold.co/300x380/e9f4fb/7aa863?text=W6" }
+      ]
+    },
+    {
+      id: 2,
+      nickname: "Fongchan A",
+      fullname: "นางสาวฟองจันทร์ อาศน์สุวรรณ",
+      role: "Motion Graphics",
+      shortBio: "ชอบสร้างสรรค์งานกราฟิก<br>และเล่าเรื่องผ่านสีสัน",
+      quote: "อยากสร้างงานให้คนรู้สึกสวยงามในเรื่องเล็กๆ<br>“ และอยากให้ทุกคนเป็นตัวเองในแบบที่อยากเป็น ”",
+      avatar: "https://placehold.co/150x150/e9f4fb/7aa863?text=Person+2",
+      banner: "images/mew-banner.jpg",
+      works: [
+        { title: "ผลงาน 1 ของคนที่ 2", category: "Motion Graphics", price: "฿450", img: "https://placehold.co/300x380/e9f4fb/7aa863?text=W1" },
+        { title: "ผลงาน 2 ของคนที่ 2", category: "Graphic Design", price: "฿450", img: "https://placehold.co/300x380/e9f4fb/7aa863?text=W2" }
+      ]
+    },
+    {
+      id: 3,
+      nickname: "Wiranya Thipmart",
+      fullname: "ชื่อจริง นามสกุลคนที่ 3",
+      role: "Drawing & Art",
+      shortBio: "ชอบสร้างสรรค์งานกราฟิก<br>และเล่าเรื่องผ่านสีสัน",
+      quote: "อยากสร้างงานให้คนรู้สึกสวยงามในเรื่องเล็กๆ<br>“ และอยากให้ทุกคนเป็นตัวเองในแบบที่อยากเป็น ”",
+      avatar: "https://placehold.co/150x150/e9f4fb/7aa863?text=Person+3",
+      banner: "images/mew-banner.jpg",
+      works: []
+    },
+    {
+      id: 4,
+      nickname: "Nichapat Srirajan",
+      fullname: "นางสาวณิชาภัทร ศรีราจันทร์",
+      role: "Photography",
+      shortBio: "ชอบสร้างสรรค์งานกราฟิก<br>และเล่าเรื่องผ่านสีสัน",
+      quote: "อยากสร้างงานให้คนรู้สึกสวยงามในเรื่องเล็กๆ<br>“ Create the things you wish existed ”",
+      avatar: "https://placehold.co/150x150/e9f4fb/7aa863?text=Person+4",
+      banner: "images/mew-banner.jpg",
+      works: []
+    },
+    {
+      id: 5,
+      nickname: "Pannika ",
+      fullname: "นางสาวพันนิกา แกมกล้า",
+      role: "Graphic Design",
+      shortBio: "ชอบสร้างสรรค์งานกราฟิก<br>และเล่าเรื่องผ่านสีสัน",
+      quote: "อยากสร้างงานให้คนรู้สึกสวยงามในเรื่องเล็กๆ<br>“ และอยากให้ทุกคนเป็นตัวเองในแบบที่อยากเป็น ”",
+      avatar: "https://placehold.co/150x150/e9f4fb/7aa863?text=Person+5",
+      banner: "images/mew-banner.jpg",
+      works: []
+    },
+    {
+      id: 6,
+      nickname: "Fahsai Jundee",
+      fullname: "นางสาวฟ้าใส จันดี",
+      role: "Graphic Design",
+      shortBio: "ชอบสร้างสรรค์งานกราฟิก<br>และเล่าเรื่องผ่านสีสัน",
+      quote: "อยากสร้างงานให้คนรู้สึกสวยงามในเรื่องเล็กๆ<br>“ และอยากให้ทุกคนเป็นตัวเองในแบบที่อยากเป็น ”",
+      avatar: "https://placehold.co/150x150/e9f4fb/7aa863?text=Person+6",
+      banner: "images/mew-banner.jpg",
+      works: []
+    },
+    {
+      id: 7,
+      nickname: "Warissara Boonmark",
+      fullname: "นางสาววริศรา บุญมาก",
+      role: "Graphic Design",
+      shortBio: "ชอบสร้างสรรค์งานกราฟิก<br>และเล่าเรื่องผ่านสีสัน",
+      quote: "อยากสร้างงานให้คนรู้สึกสวยงามในเรื่องเล็กๆ<br>“ และอยากให้ทุกคนเป็นตัวเองในแบบที่อยากเป็น ”",
+      avatar: "https://placehold.co/150x150/e9f4fb/7aa863?text=Person+7",
+      banner: "images/mew-banner.jpg",
+      works: []
+    },
+    {
+      id: 8,
+      nickname: "Phattarakorn",
+      fullname: "นายภัทรกร สินพงศ์ธรากุล",
+      role: "Graphic Design",
+      shortBio: "ชอบสร้างสรรค์งานกราฟิก<br>และเล่าเรื่องผ่านสีสัน",
+      quote: "อยากสร้างงานให้คนรู้สึกสวยงามในเรื่องเล็กๆ<br>“ และอยากให้ทุกคนเป็นตัวเองในแบบที่อยากเป็น ”",
+      avatar: "https://placehold.co/150x150/e9f4fb/7aa863?text=Person+8",
+      banner: "images/mew-banner.jpg",
+      works: []
+    },
+    {
+      id: 9,
+      nickname: "Apipakorn ",
+      fullname: "นางสาวอภิภากร พันบุญมี",
+      role: "Graphic Design",
+      shortBio: "ชอบสร้างสรรค์งานกราฟิก<br>และเล่าเรื่องผ่านสีสัน",
+      quote: "อยากสร้างงานให้คนรู้สึกสวยงามในเรื่องเล็กๆ<br>“ และอยากให้ทุกคนเป็นตัวเองในแบบที่อยากเป็น ”",
+      avatar: "https://placehold.co/150x150/e9f4fb/7aa863?text=Person+9",
+      banner: "images/mew-banner.jpg",
+      works: []
+    },
+    {
+      id: 10,
+      nickname: "Urassaya ",
+      fullname: "นางสาวอุรัสยา สุขประเสริฐ",
+      role: "Graphic Design",
+      shortBio: "ชอบสร้างสรรค์งานกราฟิก<br>และเล่าเรื่องผ่านสีสัน",
+      quote: "อยากสร้างงานให้คนรู้สึกสวยงามในเรื่องเล็กๆ<br>“ และอยากให้ทุกคนเป็นตัวเองในแบบที่อยากเป็น ”",
+      avatar: "https://placehold.co/150x150/e9f4fb/7aa863?text=Person+10",
+      banner: "images/mew-banner.jpg",
+      works: []
+    },
+    {
+      id: 11,
+      nickname: "Suppharat ",
+      fullname: "นางสาวศุภรัตนิติยา ปานทอง",
+      role: "Graphic Design",
+      shortBio: "ชอบสร้างสรรค์งานกราฟิก<br>และเล่าเรื่องผ่านสีสัน",
+      quote: "อยากสร้างงานให้คนรู้สึกสวยงามในเรื่องเล็กๆ<br>“ และอยากให้ทุกคนเป็นตัวเองในแบบที่อยากเป็น ”",
+      avatar: "https://placehold.co/150x150/e9f4fb/7aa863?text=Person+10",
+      banner: "images/mew-banner.jpg",
+      works: []
+    }
+  ];
+
+  const listView = document.getElementById("view-profiles-list");
+  const detailView = document.getElementById("view-profile-detail");
+  const profilesContainer = document.getElementById("profiles-container");
+
+  function renderProfilesGrid() {
+    profilesContainer.innerHTML = members.map(member => `
+      <div class="member-card" onclick="openProfile(${member.id})">
+        <img src="${member.avatar}" alt="${member.nickname}" class="member-avatar" />
+        <div class="member-name">${member.nickname}</div>
+        <div class="member-role">${member.role}</div>
+        <div class="member-bio-short">${member.shortBio}</div>
+        <button type="button" class="btn-view-profile">
+          ดูโปรไฟล์ <span>→</span>
+        </button>
+      </div>
+    `).join("");
+  }
+
+  function openProfile(id) {
+    const person = members.find(m => m.id === id);
+    if (!person) return;
+
+    document.getElementById("detail-avatar").src = person.avatar;
+    document.getElementById("detail-nickname").textContent = person.nickname;
+    document.getElementById("detail-fullname").textContent = person.fullname;
+    document.getElementById("detail-quote").innerHTML = person.quote;
+    document.getElementById("detail-works-owner").textContent = person.nickname;
+
+    const worksGrid = document.getElementById("detail-works-grid");
+    worksGrid.innerHTML = person.works.map(work => `
+      <div class="col">
+        <div class="work-card d-flex flex-column justify-content-between">
+          <div>
+            <img src="${work.img}" alt="${work.title}" class="work-thumb" />
+            <div class="fw-bold small mb-1">${work.title}</div>
+            <div class="text-muted" style="font-size: 0.78rem;">${work.category}</div>
+            <div class="fw-semibold small my-1" style="color: var(--pink-text);">${work.price}</div>
+          </div>
+          <button type="button" class="btn-select-work mt-2">♥ เลือกผลงาน</button>
+        </div>
+      </div>
+    `).join("");
+
+    listView.classList.add("d-none");
+    detailView.classList.remove("d-none");
+    window.scrollTo({ top: 0, behavior: "smooth" });
+
+    const bannerEl = document.querySelector(".profile-banner");
+if (person.banner) {
+  bannerEl.style.backgroundImage = `url('${person.banner}')`;
+} else {
+  bannerEl.style.backgroundImage = "linear-gradient(90deg, #f9dfe4 0%, #fbf5e8 50%, #dfeed0 100%)";
+}
+  }
+
+  function showProfilesList() {
+    detailView.classList.add("d-none");
+    listView.classList.remove("d-none");
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }
+
+
+  renderProfilesGrid();
+</script>
+</body>
+</html>

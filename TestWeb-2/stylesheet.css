@@ -1,0 +1,15 @@
+*{
+    font-family: Inter;
+}
+body{
+    width: auto;
+    height: auto;
+    background-color: #fffaf4;
+    overflow-x: hidden;
+}
+section .main-container{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    
+}

@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile Page Design</title>
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- FontAwesome สำหรับไอคอนโซเชียล -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        body {
+            background-color: #f8f5f0;
+            font-family: 'Sarabun', sans-serif;
+            color: #4a4a4a;
+        }
+        /* Navbar Styling */
+        .navbar-brand {
+            color: #e07a82 !important;
+            font-weight: bold;
+            font-size: 1.5rem;
+        }
+        .nav-link {
+            color: #6c757d !important;
+            font-size: 0.95rem;
+        }
+        .nav-link:hover {
+            color: #e07a82 !important;
+        }
+        /* Language Switcher */
+        .lang-btn {
+            border: 1px solid #ddd;
+            background: #fff;
+            border-radius: 20px;
+            padding: 2px 10px;
+            font-size: 0.85rem;
+        }
+        .lang-btn.active {
+            background-color: #fce4e6;
+            color: #e07a82;
+            border-color: #fce4e6;
+            font-weight: bold;
+        }
+        /* Profile Card Styling */
+        .profile-container {
+            background: #ffffff;
+            border-radius: 16px;
+            border: 1px solid #e5e5e5;
+            padding: 30px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+        }
+        .banner-box {
+            background: linear-gradient(135deg, #fce4e6 0%, #d8e2dc 100%);
+            border-radius: 12px;
+            height: 160px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 20px;
+            color: #3f4f44;
+            font-weight: 500;
+        }
+        .profile-avatar {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            border: 4px solid #fff;
+            object-fit: cover;
+            margin-top: -60px;
+            background-color: #eef2f5;
+        }
+        /* Back Button */
+        .btn-back {
+            border: 1px solid #ccc;
+            border-radius: 20px;
+            padding: 5px 15px;
+            font-size: 0.85rem;
+            color: #555;
+            background: #fff;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .btn-back:hover {
+            background: #f1f1f1;
+            color: #000;
+        }
+        /* Work Cards */
+        .work-card {
+            border: 1px dashed #d6ccc2;
+            border-radius: 12px;
+            background: #fff;
+            padding: 15px;
+            text-align: center;
+            transition: transform 0.2s;
+        }
+        .work-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(0,0,0,0.05);
+        }
+        .work-img-placeholder {
+            background-color: #eef2f5;
+            border-radius: 8px;
+            height: 180px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #888;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg bg-white border-bottom py-3">
+        <div class="container">
+            <a class="navbar-brand" href="#">Padma</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+                <ul class="navbar-nav align-items-center gap-3">
+                    <li class="nav-item"><a class="nav-link" href="#">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Explore Us</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Profiles</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">About Us</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Contact</a></li>
+                    <li class="nav-item"><i class="fa-solid fa-magnifying-glass text-secondary"></i></li>
+                    <li class="nav-item d-flex gap-1">
+                        <button class="lang-btn active">TH</button>
+                        <button class="lang-btn">EN</button>
+                    </li>
+                    <li class="nav-item"><i class="fa-solid fa-bars text-secondary fs-5"></i></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container my-5" style="max-width: 900px;">
+        
+        <!-- Back Button -->
+        <div class="mb-3">
+            <a href="#" class="btn-back"><i class="fa-solid fa-arrow-left"></i> Back to Profiles</a>
+        </div>
+
+        <!-- Profile Card -->
+        <div class="profile-container mb-5">
+            <!-- Banner -->
+            <div class="banner-box">
+                <p class="mb-0">ใส่พื้นหลังเป็นผลงานเราหรืออะไรก็ได้ที่เป็นภาพพื้นหลัง</p>
+            </div>
+
+            <div class="row align-items-end px-3">
+                <div class="col-auto">
+                    <!-- รูปโปรไฟล์ (สามารถเปลี่ยนลิงก์รูปภาพได้) -->
+                    <img src="https://via.placeholder.com/120" alt="Avatar" class="profile-avatar shadow-sm">
+                </div>
+                <div class="col text-end pb-2">
+                    <!-- Social Icons -->
+                    <div class="d-flex justify-content-end gap-3 fs-5 text-secondary">
+                        <a href="#" class="text-secondary"><i class="fa-brands fa-instagram"></i></a>
+                        <a href="#" class="text-secondary"><i class="fa-brands fa-facebook"></i></a>
+                        <a href="#" class="text-secondary"><i class="fa-brands fa-tiktok"></i></a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Profile Info -->
+            <div class="mt-3 px-2">
+                <h3 class="fw-bold mb-1">Name</h3>
+                <p class="text-muted small mb-2">ชื่อจริง สกุล</p>
+                <p class="fst-italic text-secondary" style="font-size: 0.95rem;">
+                    “ อยากสร้างงานให้คนดูรู้สึกสวยงานในเรื่องเล็กๆ และอยากให้ทุกคนเป็นตัวเองในแบบที่เป็น “
+                </p>
+            </div>
+        </div>
+
+        <!-- My Works Section -->
+        <div class="mb-4">
+            <h4 class="fw-bold mb-1">My Works</h4>
+            <p class="text-muted small">ผลงานของ Name - เลือกผลงานเพื่อดูรายละเอียดหรือเพิ่มลงในรายการสั่งซื้อ</p>
+            
+            <div class="row g-4 mt-2">
+                <!-- Work Item 1 -->
+                <div class="col-md-3 col-6">
+                    <div class="work-card">
+                        <div class="work-img-placeholder">
+                            <i class="fa-regular fa-image fa-2x"></i>
+                        </div>
+                        <span class="text-danger fw-bold small">฿490</span>
+                    </div>
+                </div>
+                <!-- Work Item 2 -->
+                <div class="col-md-3 col-6">
+                    <div class="work-card">
+                        <div class="work-img-placeholder">
+                            <i class="fa-regular fa-image fa-2x"></i>
+                        </div>
+                        <span class="text-danger fw-bold small">฿490</span>
+                    </div>
+                </div>
+                <!-- Work Item 3 -->
+                <div class="col-md-3 col-6">
+                    <div class="work-card">
+                        <div class="work-img-placeholder">
+                            <i class="fa-regular fa-image fa-2x"></i>
+                        </div>
+                        <span class="text-danger fw-bold small">฿490</span>
+                    </div>
+                </div>
+                <!-- Work Item 4 -->
+                <div class="col-md-3 col-6">
+                    <div class="work-card">
+                        <div class="work-img-placeholder">
+                            <i class="fa-regular fa-image fa-2x"></i>
+                        </div>
+                        <span class="text-danger fw-bold small">฿490</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Bootstrap 5 JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
